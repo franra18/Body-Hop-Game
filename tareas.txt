@@ -1,0 +1,24 @@
+-------------------------
+FRAN
+-------------------------
+· Que el agua del rio se pueda atravesar
+· Hacer camino de piedras para subir de vuelta desde el río
+· Poner vallas en la escena de campo (importar vallas y botones)
+· Creaar portal
+· Crear escena del infierno
+
+Detalles finales: 
+· Añadir sangre en la escena inicial
+
+-------------------------
+MARCOS
+-------------------------
+· Interacción de botón con el puente
+· Dos botones para activar el portal
+· Interfaz
+  - Mostrar personaje actual
+  - Mostrar contador (numérico y barra) con el tiempo restante
+  - Menú 
+
+Detalles finales:
+· Flecha que te indique dirección del otro personaje
