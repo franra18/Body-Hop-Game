@@ -1,0 +1,256 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3417008792084931046
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2407431225429045755, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_Name
+      value: Vcam_1_1aP
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725680173231446836, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_Name
+      value: Boy0_Humanoid_1 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107167189488714126, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.434
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107167189488714126, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.092
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107167189488714126, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.788
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107167189488714126, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107167189488714126, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107167189488714126, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107167189488714126, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107167189488714126, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107167189488714126, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107167189488714126, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376486969096530982, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376486969096530982, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376486969096530982, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376486969096530982, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9914449
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376486969096530982, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.13052616
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376486969096530982, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376486969096530982, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376486969096530982, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376486969096530982, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376486969096530982, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2571689292225610219, guid: 48c897de7006f436ebc613446e766067, type: 3}
+    - {fileID: 1512127214161011475, guid: 48c897de7006f436ebc613446e766067, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3725680173231446836, guid: 48c897de7006f436ebc613446e766067, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3640323299910311586}
+  m_SourcePrefab: {fileID: 100100000, guid: 48c897de7006f436ebc613446e766067, type: 3}
+--- !u!1 &2080628962961586898 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3725680173231446836, guid: 48c897de7006f436ebc613446e766067, type: 3}
+  m_PrefabInstance: {fileID: 3417008792084931046}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3640323299910311586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080628962961586898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1acbcc9984ab7c441aeea3b905ed6fae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KidsController
+  isControllable: 1
+  moveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: 95f7e46a-a905-41d9-a8df-44721d3a4f24
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b9c864a5-8135-4504-a0a2-6f19f80befca
+      m_Path: <Gamepad>/leftStick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 0
+    m_Flags: 0
+  lookAction:
+    m_Name: Look
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: 712ed3f1-8c55-45c2-bddc-71d6cf04fae0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 4e45a499-9579-4ac2-afac-5e67ed6b6fcc
+      m_Path: <Pointer>/delta
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Look
+      m_Flags: 0
+    m_Flags: 0
+  jumpAction:
+    m_Name: Jump
+    m_Type: 0
+    m_ExpectedControlType: Button
+    m_Id: cc76f9e9-06fa-4afc-a998-f593c9cafae5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: ef770893-0f8a-45dc-99b5-44a8e0cabbd8
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump
+      m_Flags: 0
+    m_Flags: 0
+  fallAction:
+    m_Name: Fall
+    m_Type: 0
+    m_ExpectedControlType: Button
+    m_Id: 56424372-a0c1-4d48-8614-06662dfbb33a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: fbe99b9e-1415-4220-a647-708c10ebfb01
+      m_Path: <Keyboard>/f
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fall
+      m_Flags: 0
+    m_Flags: 0
+  damageAction:
+    m_Name: Damage
+    m_Type: 0
+    m_ExpectedControlType: Button
+    m_Id: c1d5d39e-af8c-4b23-89f0-f27735bb4018
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 17cb4a84-1dfe-424b-90f8-dad7043cce30
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Damage
+      m_Flags: 0
+    m_Flags: 0
+  faintAction:
+    m_Name: Faint
+    m_Type: 0
+    m_ExpectedControlType: Button
+    m_Id: 1f9de9a3-2f06-420f-8dc9-4eed379d5b7e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: bdd963b9-5543-4861-b1ff-de592919989d
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Faint
+      m_Flags: 0
+    m_Flags: 0
+  runAction:
+    m_Name: Run
+    m_Type: 0
+    m_ExpectedControlType: Button
+    m_Id: 9802db58-cd86-488c-9ecf-b5f6d49aeaf2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: feb06a5e-9685-4724-9829-b7c28ae7fff9
+      m_Path: <Keyboard>/leftCtrl
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Run
+      m_Flags: 0
+    m_Flags: 0
+  moveSpeed: 5
+  runSpeed: 8
+  jumpForce: 8
+  gravity: 20
+  cameraTransform: {fileID: 7750037137981760223}
+  mouseSensitivity: 0.5
+--- !u!4 &7750037137981760223 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4964671939762651961, guid: 48c897de7006f436ebc613446e766067, type: 3}
+  m_PrefabInstance: {fileID: 3417008792084931046}
+  m_PrefabAsset: {fileID: 0}

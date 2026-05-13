@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Body Hop Game.slnx",
+    "dotnet.defaultSolution": "Body-Hop-Game.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }

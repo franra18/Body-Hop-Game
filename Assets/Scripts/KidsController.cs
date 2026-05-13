@@ -3,7 +3,14 @@ using UnityEngine.InputSystem;
 
 public class KidsController : MonoBehaviour
 {
-    [Header("Input Actions (New Input System)")]
+    [Header("Identidad y Capas")]
+    [Tooltip("Escribe aquí el nombre de la Layer que creaste (ej: Player1)")]
+    public string characterLayerName = "Default"; 
+
+    [Header("Control de Estado")]
+    public bool isControllable = true;
+
+    [Header("Input Actions")]
     public InputAction moveAction = new InputAction("Move", binding: "<Gamepad>/leftStick", expectedControlType: "Vector2");
     public InputAction lookAction = new InputAction("Look", binding: "<Pointer>/delta", expectedControlType: "Vector2");
     public InputAction jumpAction = new InputAction("Jump", binding: "<Keyboard>/space", expectedControlType: "Button");
@@ -20,7 +27,7 @@ public class KidsController : MonoBehaviour
 
     [Header("Cámara Primera Persona")]
     public Transform cameraTransform; 
-    public float mouseSensitivity = 0.1f; // Ajustado para el nuevo sistema
+    public float mouseSensitivity = 0.1f; 
     private float xRotation = 0f; 
 
     private CharacterController controller;
@@ -29,37 +36,31 @@ public class KidsController : MonoBehaviour
 
     private void OnEnable()
     {
-        // Añadir controles de teclado (WASD) por defecto al Action
         moveAction.AddCompositeBinding("Dpad")
             .With("Up", "<Keyboard>/w")
             .With("Down", "<Keyboard>/s")
             .With("Left", "<Keyboard>/a")
             .With("Right", "<Keyboard>/d");
 
-        moveAction.Enable();
-        lookAction.Enable();
-        jumpAction.Enable();
-        fallAction.Enable();
-        damageAction.Enable();
-        faintAction.Enable();
-        runAction.Enable();
+        moveAction.Enable(); lookAction.Enable(); jumpAction.Enable();
+        fallAction.Enable(); damageAction.Enable(); faintAction.Enable(); runAction.Enable();
     }
 
     private void OnDisable()
     {
-        moveAction.Disable();
-        lookAction.Disable();
-        jumpAction.Disable();
-        fallAction.Disable();
-        damageAction.Disable();
-        faintAction.Disable();
-        runAction.Disable();
+        moveAction.Disable(); lookAction.Disable(); jumpAction.Disable();
+        fallAction.Disable(); damageAction.Disable(); faintAction.Disable(); runAction.Disable();
     }
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+
+        // Asigna la capa automáticamente al empezar
+        int layerID = LayerMask.NameToLayer(characterLayerName);
+        if (layerID != -1) gameObject.layer = layerID;
+        else Debug.LogWarning("La capa '" + characterLayerName + "' no existe en el proyecto.");
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -68,53 +69,51 @@ public class KidsController : MonoBehaviour
     void Update()
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        bool isIncapacitated = stateInfo.IsName("damage") || stateInfo.IsName("down") || stateInfo.IsName("faint") || stateInfo.IsName("standup_faint");
+        bool isDown = stateInfo.IsName("down");
+        bool isIncapacitated = isDown || stateInfo.IsName("damage") || stateInfo.IsName("faint") || stateInfo.IsName("standup_faint");
 
         float moveH = 0f;
         float moveV = 0f;
         bool isRunning = false;
 
-        if (!isIncapacitated)
+        if (isControllable && !isIncapacitated)
         {
             Vector2 moveInput = moveAction.ReadValue<Vector2>();
             moveH = moveInput.x;
             moveV = moveInput.y;
-
-            if (runAction.IsPressed() && (Mathf.Abs(moveH) > 0.1f || Mathf.Abs(moveV) > 0.1f))
-            {
-                isRunning = true;
-            }
+            if (runAction.IsPressed() && (Mathf.Abs(moveH) > 0.1f || Mathf.Abs(moveV) > 0.1f)) isRunning = true;
         }
+
+        float verticalVelocity = moveDirection.y;
+        Vector3 horizontalMove = new Vector3(moveH, 0, moveV);
+        horizontalMove = transform.TransformDirection(horizontalMove);
+        float currentMoveSpeed = isRunning ? runSpeed : moveSpeed;
+        horizontalMove *= currentMoveSpeed;
+
+        moveDirection = new Vector3(horizontalMove.x, verticalVelocity, horizontalMove.z);
 
         if (controller.isGrounded)
         {
-            moveDirection = new Vector3(moveH, 0, moveV);
-            moveDirection = transform.TransformDirection(moveDirection);
-
-            float currentMoveSpeed = isRunning ? runSpeed : moveSpeed;
-            moveDirection *= currentMoveSpeed;
-
-            if (jumpAction.WasPressedThisFrame() && !isIncapacitated)
+            if (moveDirection.y < 0) moveDirection.y = -2f;
+            if (isControllable && jumpAction.WasPressedThisFrame() && !isIncapacitated)
             {
                 moveDirection.y = jumpForce;
                 animator.SetTrigger("JumpTrigger");
             }
         }
 
-        // --- SISTEMA DE VISIÓN ---
-        if (controller.enabled)
+        if (controller.enabled && cameraTransform != null)
         {
-            Vector2 lookInput = lookAction.ReadValue<Vector2>();
-            float mouseX = lookInput.x * mouseSensitivity;
-            float mouseY = lookInput.y * mouseSensitivity;
-
-            transform.Rotate(Vector3.up * mouseX);
-
-            if (cameraTransform != null)
+            if (isDown)
             {
-                xRotation -= mouseY;
-                xRotation = Mathf.Clamp(xRotation, -80f, 80f); 
-
+                cameraTransform.localRotation = Quaternion.Slerp(cameraTransform.localRotation, Quaternion.Euler(70f, 0f, 0f), Time.deltaTime * 5f);
+            }
+            else if (isControllable)
+            {
+                Vector2 lookInput = lookAction.ReadValue<Vector2>();
+                transform.Rotate(Vector3.up * lookInput.x * mouseSensitivity);
+                xRotation -= lookInput.y * mouseSensitivity;
+                xRotation = Mathf.Clamp(xRotation, -80f, 80f);
                 cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
             }
         }
@@ -123,14 +122,14 @@ public class KidsController : MonoBehaviour
         controller.Move(moveDirection * Time.deltaTime);
 
         float currentSpeed = new Vector2(moveH, moveV).magnitude;
-        if (isRunning)
-        {
-            currentSpeed *= (runSpeed / moveSpeed);
-        }
+        if (isRunning) currentSpeed *= (runSpeed / moveSpeed);
         animator.SetFloat("Speed", currentSpeed);
 
-        if (fallAction.WasPressedThisFrame()) animator.SetTrigger("FallTrigger");
-        if (damageAction.WasPressedThisFrame()) animator.SetTrigger("DamageTrigger");
-        if (faintAction.WasPressedThisFrame()) animator.SetTrigger("FaintTrigger");
+        if (isControllable)
+        {
+            if (fallAction.WasPressedThisFrame()) animator.SetTrigger("FallTrigger");
+            if (damageAction.WasPressedThisFrame()) animator.SetTrigger("DamageTrigger");
+            if (faintAction.WasPressedThisFrame()) animator.SetTrigger("FaintTrigger");
+        }
     }
 }

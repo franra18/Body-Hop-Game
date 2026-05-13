@@ -19,24 +19,19 @@ public class CharacterSwitcher : MonoBehaviour
 
     [Header("Configuración (New Input System)")]
     public InputAction switchAction = new InputAction("Switch", binding: "<Keyboard>/tab", expectedControlType: "Button");
-    public float waitTimeAnimations = 1.5f; // Tiempo que tarda en caer/levantarse
+    
+    [Header("Tiempos de Secuencia")]
+    public float cameraTransitionTime = 1.5f; 
+    public float animationTime = 1.5f;        
 
     private bool isCharacter1Active = true;
     private bool isSwitching = false;
 
-    private void OnEnable()
-    {
-        switchAction.Enable();
-    }
-
-    private void OnDisable()
-    {
-        switchAction.Disable();
-    }
+    private void OnEnable() => switchAction.Enable();
+    private void OnDisable() => switchAction.Disable();
 
     void Start()
     {
-        // Estado inicial: Personaje 1 en 1ª persona, Personaje 2 en el suelo
         SetAllPrioritiesLow();
         vCam1_1st.Priority = 10;
         
@@ -63,36 +58,37 @@ public class CharacterSwitcher : MonoBehaviour
         CinemachineCamera target3rd = isCharacter1Active ? vCam2_3rd : vCam1_3rd;
         CinemachineCamera target1st = isCharacter1Active ? vCam2_1st : vCam1_1st;
 
-        // 1. Ir a vista de 3ª persona del personaje actual y caer
+        KidsController currentCtrl = currentPos.GetComponent<KidsController>();
+        Animator currentAnim = currentPos.GetComponent<Animator>();
+
+        // 0. Quitamos el control pero el script sigue "encendido" para que caiga
+        if(currentCtrl) currentCtrl.isControllable = false;
+        if(currentAnim) currentAnim.SetFloat("Speed", 0);
+
         SetAllPrioritiesLow();
         current3rd.Priority = 10;
         
-        KidsController currentCtrl = currentPos.GetComponent<KidsController>();
-        Animator currentAnim = currentPos.GetComponent<Animator>();
-        
-        if(currentCtrl) currentCtrl.enabled = false;
-        if(currentAnim) {
-            currentAnim.SetFloat("Speed", 0);
-            currentAnim.Play("down");
-        }
+        yield return new WaitForSeconds(cameraTransitionTime);
 
-        yield return new WaitForSeconds(waitTimeAnimations);
+        if(currentAnim) currentAnim.Play("down");
 
-        // 2. Ir a vista de 3ª persona del otro personaje y levantarse
+        yield return new WaitForSeconds(animationTime);
+
         SetAllPrioritiesLow();
         target3rd.Priority = 10;
-        
+
+        yield return new WaitForSeconds(cameraTransitionTime);
+
         Animator targetAnim = targetPos.GetComponent<Animator>();
         if(targetAnim) targetAnim.Play("standup_faint");
 
-        yield return new WaitForSeconds(waitTimeAnimations);
+        yield return new WaitForSeconds(animationTime);
 
-        // 3. Finalmente, ir a la 1ª persona del nuevo personaje y darle el control
         SetAllPrioritiesLow();
         target1st.Priority = 10;
         
         KidsController targetCtrl = targetPos.GetComponent<KidsController>();
-        if(targetCtrl) targetCtrl.enabled = true;
+        if(targetCtrl) targetCtrl.isControllable = true;
 
         isCharacter1Active = !isCharacter1Active;
         isSwitching = false;
@@ -108,7 +104,8 @@ public class CharacterSwitcher : MonoBehaviour
 
     void ApplyInitialState(GameObject character, bool isActive)
     {
-        character.GetComponent<KidsController>().enabled = isActive;
+        // Cambiamos el estado de control inicial
+        character.GetComponent<KidsController>().isControllable = isActive;
         if (!isActive) character.GetComponent<Animator>().Play("down");
     }
 }
