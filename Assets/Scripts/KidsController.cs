@@ -3,10 +3,6 @@ using UnityEngine.InputSystem;
 
 public class KidsController : MonoBehaviour
 {
-    [Header("Identidad y Capas")]
-    [Tooltip("Escribe aquí el nombre de la Layer que creaste (ej: Player1)")]
-    public string characterLayerName = "Default"; 
-
     [Header("Control de Estado")]
     public bool isControllable = true;
 
@@ -56,11 +52,6 @@ public class KidsController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-
-        // Asigna la capa automáticamente al empezar
-        int layerID = LayerMask.NameToLayer(characterLayerName);
-        if (layerID != -1) gameObject.layer = layerID;
-        else Debug.LogWarning("La capa '" + characterLayerName + "' no existe en el proyecto.");
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
