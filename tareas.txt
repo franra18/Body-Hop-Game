@@ -1,14 +1,14 @@
 -------------------------
 FRAN
 -------------------------
-· Que el agua del rio se pueda atravesar
-· Hacer camino de piedras para subir de vuelta desde el río
-· Poner vallas en la escena de campo (importar vallas y botones)
-· Creaar portal
+· Hacer camino para subir de vuelta desde el río
+· Importar botones/palancas
+· Crear portal
 · Crear escena del infierno
+· Limpiar carpeta Assets
 
 Detalles finales: 
-· Añadir sangre en la escena inicial
+· Añadir sangre y humo de coche en la escena inicial
 
 -------------------------
 MARCOS
