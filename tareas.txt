@@ -13,12 +13,11 @@ Detalles finales:
 -------------------------
 MARCOS
 -------------------------
-· Interacción de botón con el puente
 · Dos botones para activar el portal
+· Cambio de escena con el portal
 · Interfaz
-  - Mostrar personaje actual
-  - Mostrar contador (numérico y barra) con el tiempo restante
   - Menú 
 
 Detalles finales:
 · Flecha que te indique dirección del otro personaje
+· Sangre donde spawnea el otro cuerpo "muerto"
