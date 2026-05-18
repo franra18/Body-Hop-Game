@@ -12,7 +12,7 @@ public class KidsController : MonoBehaviour
     public InputAction jumpAction = new InputAction("Jump", binding: "<Keyboard>/space", expectedControlType: "Button");
     public InputAction fallAction = new InputAction("Fall", binding: "<Keyboard>/f", expectedControlType: "Button");
     public InputAction damageAction = new InputAction("Damage", binding: "<Keyboard>/q", expectedControlType: "Button");
-    public InputAction faintAction = new InputAction("Faint", binding: "<Keyboard>/e", expectedControlType: "Button");
+    public InputAction faintAction = new InputAction("Faint", binding: "<Keyboard>/z", expectedControlType: "Button");
     public InputAction runAction = new InputAction("Run", binding: "<Keyboard>/leftCtrl", expectedControlType: "Button");
 
     [Header("Parámetros Físicos")]

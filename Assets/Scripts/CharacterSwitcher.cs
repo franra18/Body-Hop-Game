@@ -19,8 +19,7 @@ public class CharacterSwitcher : MonoBehaviour
     public CinemachineCamera vCam2_3rd;
 
     [Header("Interfaz HUD")]
-    [Tooltip("Arrastra aquí el objeto visual completo de la foto (por ejemplo, el BordeHUD, MascaraHUD o la foto en sí) para ocultarlo entero")]
-    public GameObject contenedorHUD; 
+    public Canvas canvasHUD; // <--- Variable para apagar todo el Canvas
     public Image fotoHUD; 
     public Sprite fotoPersonaje1; 
     public Sprite fotoPersonaje2; 
@@ -32,7 +31,7 @@ public class CharacterSwitcher : MonoBehaviour
     public float cameraTransitionTime = 1.5f; 
     public float animationTime = 1.5f;        
 
-    private bool isCharacter1Active = true;
+    public bool isCharacter1Active = true;
     private bool isSwitching = false;
 
     private void OnEnable() => switchAction.Enable();
@@ -47,7 +46,6 @@ public class CharacterSwitcher : MonoBehaviour
         ApplyInitialState(character2, false);
 
         if (fotoHUD != null) fotoHUD.sprite = fotoPersonaje1;
-        if (contenedorHUD != null) contenedorHUD.SetActive(true);
     }
 
     void Update()
@@ -62,8 +60,8 @@ public class CharacterSwitcher : MonoBehaviour
     {
         isSwitching = true;
 
-        // Ocultar el HUD al iniciar la transición
-        if (contenedorHUD != null) contenedorHUD.SetActive(false);
+        // Apaga el Canvas completo al instante
+        if (canvasHUD != null) canvasHUD.enabled = false; 
 
         GameObject currentPos = isCharacter1Active ? character1 : character2;
         GameObject targetPos = isCharacter1Active ? character2 : character1;
@@ -105,9 +103,10 @@ public class CharacterSwitcher : MonoBehaviour
 
         isCharacter1Active = !isCharacter1Active;
 
-        // Cambiar la foto y volver a mostrar el HUD al terminar la transición
         if (fotoHUD != null) fotoHUD.sprite = isCharacter1Active ? fotoPersonaje1 : fotoPersonaje2;
-        if (contenedorHUD != null) contenedorHUD.SetActive(true);
+
+        // Vuelve a encender el Canvas completo al terminar
+        if (canvasHUD != null) canvasHUD.enabled = true; 
 
         isSwitching = false;
     }
