@@ -17,6 +17,7 @@ MARCOS
 · Cambio de escena con el portal
 · Interfaz
   - Menú 
+  - Arreglar barra tiempo
 
 Detalles finales:
 · Flecha que te indique dirección del otro personaje

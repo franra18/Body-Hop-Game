@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class AN_Button : MonoBehaviour
 {
+    public enum ModoFuncionamiento { Normal, Excluyente, Cooperativo }
+
     [Header("Restricción de Personaje")]
     public string tagPermitido = "Boy1";
     public InputAction interactAction = new InputAction("Interact", binding: "<Keyboard>/e", expectedControlType: "Button");
@@ -11,17 +13,20 @@ public class AN_Button : MonoBehaviour
     public bool isLever = false;
     public bool Locked = false;
 
-    [Header("Nuevo: Objeto a Alternar")]
-    [Tooltip("Arrastra aquí el objeto que quieres que aparezca o desaparezca")]
+    [Header("Comportamiento")]
+    [Tooltip("Normal: Funciona sola. Excluyente: Apaga la otra al encenderse. Cooperativo: Ambas deben estar encendidas.")]
+    public ModoFuncionamiento modo = ModoFuncionamiento.Normal;
+
+    [Tooltip("El objeto que aparecerá/desaparecerá")]
     public GameObject objetoObjetivo;
 
-    [Header("Exclusividad (Opcional)")]
-    [Tooltip("Arrastra aquí el objeto de la OTRA palanca para desactivarla automáticamente")]
-    public AN_Button palancaExcluyente;
+    [Tooltip("Arrastra aquí la otra palanca/botón si usas el modo Excluyente o Cooperativo")]
+    public AN_Button palancaSocia;
 
+    [HideInInspector]
+    public bool estadoActivo = false;
     private Animator anim;
     private bool personajeEnRango = false;
-    public bool estadoActivo; 
 
     private void OnEnable() => interactAction.Enable();
     private void OnDisable() => interactAction.Disable();
@@ -29,7 +34,8 @@ public class AN_Button : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        if (objetoObjetivo != null)
+        
+        if (modo != ModoFuncionamiento.Cooperativo && objetoObjetivo != null)
         {
             estadoActivo = objetoObjetivo.activeSelf;
             if (isLever) anim.SetBool("LeverUp", estadoActivo);
@@ -40,22 +46,45 @@ public class AN_Button : MonoBehaviour
     {
         if (Locked) return;
 
-        if (objetoObjetivo != null && personajeEnRango)
+        if (personajeEnRango)
         {
             if (interactAction.WasPressedThisFrame())
             {
+                Debug.Log("Interacción pulsada correctamente por el personaje en rango.");
                 estadoActivo = !estadoActivo;
-                objetoObjetivo.SetActive(estadoActivo);
                 
-                // Si esta palanca se acaba de encender, apaga la otra
-                if (estadoActivo && palancaExcluyente != null)
-                {
-                    palancaExcluyente.ApagarForzosamente();
-                }
-                
+                Debug.Log("Ejecutando animación. ¿Es palanca?: " + isLever + " | Nuevo estado: " + estadoActivo);
                 if (isLever) anim.SetBool("LeverUp", estadoActivo);
-                else anim.SetTrigger("ButtonPress"); 
+                else anim.SetTrigger("ButtonPress");
+
+                EjecutarLogica();
             }
+        }
+    }
+
+    public void EjecutarLogica()
+    {
+        switch (modo)
+        {
+            case ModoFuncionamiento.Normal:
+                if (objetoObjetivo != null) objetoObjetivo.SetActive(estadoActivo);
+                break;
+
+            case ModoFuncionamiento.Excluyente:
+                if (objetoObjetivo != null) objetoObjetivo.SetActive(estadoActivo);
+                if (estadoActivo && palancaSocia != null)
+                {
+                    palancaSocia.ApagarForzosamente();
+                }
+                break;
+
+            case ModoFuncionamiento.Cooperativo:
+                ActualizarObjetoCooperativo();
+                if (palancaSocia != null)
+                {
+                    palancaSocia.ActualizarObjetoCooperativo();
+                }
+                break;
         }
     }
 
@@ -69,13 +98,32 @@ public class AN_Button : MonoBehaviour
         }
     }
 
+    public void ActualizarObjetoCooperativo()
+    {
+        if (modo == ModoFuncionamiento.Cooperativo && objetoObjetivo != null)
+        {
+            bool sociaActiva = (palancaSocia != null) ? palancaSocia.estadoActivo : false;
+            objetoObjetivo.SetActive(this.estadoActivo && sociaActiva);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(tagPermitido)) personajeEnRango = true;
+        Debug.Log("Objeto ha entrado en el Trigger: " + other.gameObject.name + " | Tag: " + other.tag);
+        
+        if (other.CompareTag(tagPermitido))
+        {
+            Debug.Log("¡Objeto VÁLIDO en rango de interacción!");
+            personajeEnRango = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(tagPermitido)) personajeEnRango = false;
+        if (other.CompareTag(tagPermitido))
+        {
+            Debug.Log("Objeto válido ha SALIDO del rango de interacción.");
+            personajeEnRango = false;
+        }
     }
 }
