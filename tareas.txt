@@ -1,13 +1,15 @@
 -------------------------
 FRAN
 -------------------------
-· Hacer camino para subir de vuelta desde el río
-· Importar botones/palancas
-· Crear portal
-· Crear escena del infierno
-· Limpiar carpeta Assets
+· Decorar río con piedras
+· Hacer desafío palancas infierno
+· Crear escenario de alma encerrada
+· Intentar modificar el WaterReset para que devuelva al jugador al último punto de tierra en el que estaba
+· Añadir sonidos/música
+· Crear presentación/vídeo introductorio
 
 Detalles finales: 
+· Limpiar carpeta Assets
 · Añadir sangre y humo de coche en la escena inicial
 
 -------------------------
