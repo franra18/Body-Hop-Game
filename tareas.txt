@@ -17,8 +17,10 @@ MARCOS
 · Cambio de escena con el portal
 · Interfaz
   - Menú 
-  - Arreglar barra tiempo
+  - Arreglar barra tiempo (cambiar estilos -> extremos redondos y bordes negros)
+  - Mejorar resolución imagen usuario (también hacer más pequeña)
+· Actualmente si te pegas a un muro puedes ver a través de él -> Arreglarlo
+· Cuando se active el segundo botón del puente, hacer que desaparezca el laberinto. Si se vuelve a pulsar, el laberinto no aparece de vuelta, pero el puente si
 
 Detalles finales:
 · Flecha que te indique dirección del otro personaje
-· Sangre donde spawnea el otro cuerpo "muerto"
