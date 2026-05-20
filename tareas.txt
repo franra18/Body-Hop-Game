@@ -7,6 +7,7 @@ FRAN
 · Intentar modificar el WaterReset para que devuelva al jugador al último punto de tierra en el que estaba
 · Añadir sonidos/música
 · Crear presentación/vídeo introductorio
+· Crear carteles
 
 Detalles finales: 
 · Limpiar carpeta Assets
