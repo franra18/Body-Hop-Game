@@ -606,7 +606,7 @@ PrefabInstance:
     - target: {fileID: 7066963040038473936, guid: a0164d9c476080e449c72cf58e7709ab, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: ff308921ef69aab469509d9d46afce48, type: 2}
+      objectReference: {fileID: 2100000, guid: 085743d02b1be544aa23fa7c3826a086, type: 2}
     - target: {fileID: 7066963040038473936, guid: a0164d9c476080e449c72cf58e7709ab, type: 3}
       propertyPath: 'm_Materials.Array.data[2]'
       value: 
@@ -10914,6 +10914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TimerHUD
   switcher: {fileID: 1434433455}
   minutosIniciales: 20
+  tiempoRestante: 0
   barraDeTiempo: {fileID: 1648516046}
   textoTiempo: {fileID: 894189228}
   colorPersonaje1: {r: 0.25490198, g: 0.40784317, b: 0.24313727, a: 1}
@@ -12228,7 +12229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8395594767679730312, guid: 7e13b46adc22ea746b4c7fc4cfb387a6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -12237,7 +12238,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5674429521405801630, guid: 7e13b46adc22ea746b4c7fc4cfb387a6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1690623558}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8395594767679730312, guid: 7e13b46adc22ea746b4c7fc4cfb387a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1802692279}
+    - targetCorrespondingSourceObject: {fileID: 8395594767679730312, guid: 7e13b46adc22ea746b4c7fc4cfb387a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1802692278}
   m_SourcePrefab: {fileID: 100100000, guid: 7e13b46adc22ea746b4c7fc4cfb387a6, type: 3}
 --- !u!1001 &1565432440
 PrefabInstance:
@@ -13289,8 +13296,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 7482667652216324306, guid: e028e89e5c16be5428ba899d7fd88261, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -14638,6 +14645,44 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5674429521405801630, guid: 7e13b46adc22ea746b4c7fc4cfb387a6, type: 3}
   m_PrefabInstance: {fileID: 1560645585}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1802692278
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580507390}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.33891425, y: 0.76515275, z: 0.10265662}
+  m_Center: {x: 0.028501993, y: -0.11742345, z: 0.02307628}
+--- !u!114 &1802692279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580507390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d100162fd76c23046be51c0523d23a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PortalScene
+  tagPermitido1: Player1
+  tagPermitido2: Player2
+  nombreDeEscena: EscenaInfierno
+  timer: {fileID: 1475623795}
+  switcher: {fileID: 1434433455}
 --- !u!1 &1804299439
 GameObject:
   m_ObjectHideFlags: 0

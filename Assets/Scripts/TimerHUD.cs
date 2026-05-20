@@ -9,7 +9,7 @@ public class TimerHUD : MonoBehaviour
 
     [Header("Configuración de Tiempo")]
     public float minutosIniciales = 20f;
-    private float tiempoRestante;
+    public float tiempoRestante;
     private float tiempoTotalSegundos;
 
     [Header("Interfaz HUD")]
@@ -23,7 +23,23 @@ public class TimerHUD : MonoBehaviour
     void Start()
     {
         tiempoTotalSegundos = minutosIniciales * 60f;
-        tiempoRestante = tiempoTotalSegundos;
+
+        // Si el tiempo es distinto de -1, significa que venimos de otra escena con el tiempo guardado
+        if (GameData.tiempoGuardado != -1f)
+        {
+            tiempoRestante = GameData.tiempoGuardado;
+        }
+        else
+        {
+            tiempoRestante = tiempoTotalSegundos; // Inicio normal
+        }
+
+        // Configurar personaje activo guardado
+        if (switcher != null)
+        {
+            switcher.isCharacter1Active = GameData.personaje1Activo;
+            // Aquí deberías llamar a la función de tu switcher que activa/desactiva las mallas de los personajes
+        }
     }
 
     void Update()
@@ -32,7 +48,7 @@ public class TimerHUD : MonoBehaviour
         {
             tiempoRestante -= Time.deltaTime;
             if (tiempoRestante < 0) tiempoRestante = 0;
-            
+
             ActualizarUI();
         }
     }
