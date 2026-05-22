@@ -16,10 +16,6 @@ public class TimerHUD : MonoBehaviour
     public Image barraDeTiempo;
     public TextMeshProUGUI textoTiempo;
 
-    [Header("Colores por Personaje")]
-    public Color colorPersonaje1 = Color.cyan;
-    public Color colorPersonaje2 = Color.magenta;
-
     void Start()
     {
         tiempoTotalSegundos = minutosIniciales * 60f;
@@ -56,13 +52,6 @@ public class TimerHUD : MonoBehaviour
     void ActualizarUI()
     {
         barraDeTiempo.fillAmount = tiempoRestante / tiempoTotalSegundos;
-
-        if (switcher != null)
-        {
-            Color colorActual = switcher.isCharacter1Active ? colorPersonaje1 : colorPersonaje2;
-            barraDeTiempo.color = colorActual;
-            textoTiempo.color = colorActual;
-        }
 
         int minutos = Mathf.FloorToInt(tiempoRestante / 60f);
         int segundos = Mathf.FloorToInt(tiempoRestante % 60f);

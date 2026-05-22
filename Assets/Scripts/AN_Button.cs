@@ -23,6 +23,10 @@ public class AN_Button : MonoBehaviour
     [Tooltip("Arrastra aquí la otra palanca/botón si usas el modo Excluyente o Cooperativo")]
     public AN_Button palancaSocia;
 
+    [Header("Desactivación Extra")]
+    [Tooltip("Objeto opcional. Si está activo al pulsar la palanca/botón, se desactivará.")]
+    public GameObject objetoADesactivar;
+
     [HideInInspector]
     public bool estadoActivo = false;
     private Animator anim;
@@ -51,6 +55,13 @@ public class AN_Button : MonoBehaviour
             if (interactAction.WasPressedThisFrame())
             {
                 Debug.Log("Interacción pulsada correctamente por el personaje en rango.");
+                
+                if (objetoADesactivar != null && objetoADesactivar.activeSelf)
+                {
+                    objetoADesactivar.SetActive(false);
+                    Debug.Log("Objeto extra desactivado: " + objetoADesactivar.name);
+                }
+
                 estadoActivo = !estadoActivo;
                 
                 Debug.Log("Ejecutando animación. ¿Es palanca?: " + isLever + " | Nuevo estado: " + estadoActivo);

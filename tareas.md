@@ -4,20 +4,18 @@
 - Crear escenario de alma encerrada
 - Anadir sonidos/musica
 - Crear presentacion/video introductorio
+- Carteles prueba 1 infierno
 
 ### Detalles finales
 - Limpiar carpeta Assets
 - Anadir sangre y humo de coche en la escena inicial
 
 ## MARCOS
-- Implementar comportamientos desafíos EscenaInfierno
+- Implementar comportamientos segudno desafío EscenaInfierno
 - Sale el siguiente warning: The referenced script on this Behaviour (Game Object 'Button_Object') is missing!
 - Interfaz
   - Menu
-  - Arreglar barra tiempo (cambiar estilos -> extremos redondos, bordes negros y un solo color para ambos personajes), arreglar contraste en general
-  - Mejorar resolucion imagen usuario (tambien hacer mas pequeña)
-- Actualmente si te pegas a un muro puedes ver a traves de el -> Arreglarlo
-- Cuando se active el segundo boton del puente (EscenaInicial), hacer que desaparezca el laberinto. Si se vuelve a pulsar, el laberinto no aparece de vuelta, pero el puente si
+  - Mejorar resolucion imagen usuario
 
 ### Detalles finales
 - Flecha que te indique direccion del otro personaje
