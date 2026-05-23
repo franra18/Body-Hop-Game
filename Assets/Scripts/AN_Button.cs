@@ -5,9 +5,9 @@ public class AN_Button : MonoBehaviour
 {
     public enum ModoFuncionamiento { Normal, Excluyente, Cooperativo }
 
-    [Header("Tags de Personajes")]
-    public string tagPersonaje1 = "Player1";
-    public string tagPersonaje2 = "Player2";
+    [Header("Restricción de Personaje")]
+    [Tooltip("Escribe aquí el tag del ÚNICO personaje que puede usar esta palanca/botón")]
+    public string tagPermitido = "Player1";
     public InputAction interactAction = new InputAction("Interact", binding: "<Keyboard>/e", expectedControlType: "Button");
 
     [Header("Control de Personaje")]
@@ -32,8 +32,7 @@ public class AN_Button : MonoBehaviour
     public bool estadoActivo = false;
     private Animator anim;
     
-    private bool char1Dentro = false;
-    private bool char2Dentro = false;
+    private bool personajeDentro = false;
     private static GameObject focoUI;
 
     private void OnEnable() => interactAction.Enable();
@@ -57,10 +56,12 @@ public class AN_Button : MonoBehaviour
         if (Locked) return;
 
         bool puedeInteractuar = false;
-        if (switcher != null)
+        
+        // Verificamos si el personaje con el tag permitido está dentro Y si es el que estamos controlando
+        if (personajeDentro && switcher != null)
         {
-            if (char1Dentro && switcher.isCharacter1Active) puedeInteractuar = true;
-            if (char2Dentro && !switcher.isCharacter1Active) puedeInteractuar = true;
+            if (switcher.isCharacter1Active && switcher.character1.CompareTag(tagPermitido)) puedeInteractuar = true;
+            if (!switcher.isCharacter1Active && switcher.character2.CompareTag(tagPermitido)) puedeInteractuar = true;
         }
 
         if (puedeInteractuar)
@@ -140,13 +141,11 @@ public class AN_Button : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(tagPersonaje1)) char1Dentro = true;
-        if (other.CompareTag(tagPersonaje2)) char2Dentro = true;
+        if (other.CompareTag(tagPermitido)) personajeDentro = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(tagPersonaje1)) char1Dentro = false;
-        if (other.CompareTag(tagPersonaje2)) char2Dentro = false;
+        if (other.CompareTag(tagPermitido)) personajeDentro = false;
     }
 }
