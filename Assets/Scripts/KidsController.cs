@@ -59,6 +59,19 @@ public class KidsController : MonoBehaviour
 
     void Update()
     {
+        // Control dinámico del ratón según el estado de pausa
+        if (Time.timeScale == 0f)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            return;
+        }
+        else if (Cursor.lockState != CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         bool isDown = stateInfo.IsName("down");
         bool isIncapacitated = isDown || stateInfo.IsName("damage") || stateInfo.IsName("faint") || stateInfo.IsName("standup_faint");

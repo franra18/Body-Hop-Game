@@ -11,11 +11,7 @@
 - Anadir sangre y humo de coche en la escena inicial
 
 ## MARCOS
-- Implementar comportamientos segudno desafío EscenaInfierno
-- Sale el siguiente warning: The referenced script on this Behaviour (Game Object 'Button_Object') is missing!
-- Interfaz
-  - Menu
-  - Mejorar resolucion imagen usuario
+- Mejorar resolucion imagen usuario
 
 ### Detalles finales
 - Flecha que te indique direccion del otro personaje
@@ -37,3 +33,22 @@ Se puede usar un documento (tipo PowerPoint o similar) que sirva de guía para m
 ## Tráiler
 
 - [ ] Un tráiler/vídeo que muestre el funcionamiento del juego.
+
+
+
+
+## COSAS A TENER EN CUENTA PARA ACABAR EL JUEGO
+
+Al modificar AudioListener.volume, el ajuste se aplica automáticamente a todos los sonidos del juego sin necesidad de tocar nada más.
+
+Para acceder a esa variable desde cualquier otro script, debes usar PlayerPrefs.GetFloat con el mismo nombre exacto que le pusiste ("VolumenJuego"). Se hace con esta línea:
+
+float volumenActual = PlayerPrefs.GetFloat("VolumenJuego", 1f);
+
+El 1f del final es el valor por defecto que te devolverá si el jugador acaba de instalar el juego y aún no ha movido la barra de volumen.
+
+---------------------------
+
+Para la Victoria: En el script donde el personaje cruza el portal final o resuelve el último puzzle, añade:
+
+FindObjectOfType<DynamicMenuManager>().MostrarMenu(DynamicMenuManager.MenuState.Victoria);

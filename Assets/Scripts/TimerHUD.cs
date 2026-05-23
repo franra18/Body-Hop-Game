@@ -11,6 +11,9 @@ public class TimerHUD : MonoBehaviour
     public float minutosIniciales = 20f;
     public float tiempoRestante;
     private float tiempoTotalSegundos;
+    
+    // Evita que el menú de Game Over se llame en cada frame cuando el tiempo es 0
+    private bool gameOverActivado = false; 
 
     [Header("Interfaz HUD")]
     public Image barraDeTiempo;
@@ -43,7 +46,21 @@ public class TimerHUD : MonoBehaviour
         if (tiempoRestante > 0)
         {
             tiempoRestante -= Time.deltaTime;
-            if (tiempoRestante < 0) tiempoRestante = 0;
+            
+            if (tiempoRestante <= 0) 
+            {
+                tiempoRestante = 0;
+                
+                if (!gameOverActivado)
+                {
+                    gameOverActivado = true;
+                    DynamicMenuManager menuManager = FindAnyObjectByType<DynamicMenuManager>();
+                    if (menuManager != null)
+                    {
+                        menuManager.MostrarMenu(DynamicMenuManager.MenuState.GameOver);
+                    }
+                }
+            }
 
             ActualizarUI();
         }

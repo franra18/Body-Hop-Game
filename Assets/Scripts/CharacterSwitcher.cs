@@ -19,7 +19,7 @@ public class CharacterSwitcher : MonoBehaviour
     public CinemachineCamera vCam2_3rd;
 
     [Header("Interfaz HUD")]
-    public Canvas canvasHUD; // <--- Variable para apagar todo el Canvas
+    public Canvas canvasHUD; 
     public Image fotoHUD;
     public Sprite fotoPersonaje1;
     public Sprite fotoPersonaje2;
@@ -54,17 +54,19 @@ public class CharacterSwitcher : MonoBehaviour
         }
         else
         {
-            vCam2_1st.Priority = 10; // Sustituye por el nombre de la cámara del personaje 2
+            vCam2_1st.Priority = 10; 
 
             ApplyInitialState(character1, false);
             ApplyInitialState(character2, true);
 
-            if (fotoHUD != null) fotoHUD.sprite = fotoPersonaje2; // Sustituye por la variable de la foto 2
+            if (fotoHUD != null) fotoHUD.sprite = fotoPersonaje2; 
         }
     }
 
     void Update()
     {
+        if (Time.timeScale == 0f) return;
+
         if (switchAction.WasPressedThisFrame() && !isSwitching)
         {
             StartCoroutine(SwitchSequence());
@@ -75,7 +77,6 @@ public class CharacterSwitcher : MonoBehaviour
     {
         isSwitching = true;
 
-        // Apaga el Canvas completo al instante
         if (canvasHUD != null) canvasHUD.enabled = false;
 
         GameObject currentPos = isCharacter1Active ? character1 : character2;
@@ -120,7 +121,6 @@ public class CharacterSwitcher : MonoBehaviour
 
         if (fotoHUD != null) fotoHUD.sprite = isCharacter1Active ? fotoPersonaje1 : fotoPersonaje2;
 
-        // Vuelve a encender el Canvas completo al terminar
         if (canvasHUD != null) canvasHUD.enabled = true;
 
         isSwitching = false;
