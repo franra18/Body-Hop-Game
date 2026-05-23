@@ -7867,7 +7867,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3075017905261226027, guid: 035c4d0c6c74c8e4697fac20735c8ad7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.58644
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3075017905261226027, guid: 035c4d0c6c74c8e4697fac20735c8ad7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7875,7 +7875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3075017905261226027, guid: 035c4d0c6c74c8e4697fac20735c8ad7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.518478
+      value: -11.93
       objectReference: {fileID: 0}
     - target: {fileID: 3075017905261226027, guid: 035c4d0c6c74c8e4697fac20735c8ad7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7907,7 +7907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6236126359936965462, guid: 035c4d0c6c74c8e4697fac20735c8ad7, type: 3}
       propertyPath: m_Name
-      value: Billboard
+      value: CartelExplicativo
       objectReference: {fileID: 0}
     - target: {fileID: 7514968889181607290, guid: 035c4d0c6c74c8e4697fac20735c8ad7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -9889,7 +9889,7 @@ Transform:
   m_GameObject: {fileID: 1345123889}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.67885, y: 0.10413, z: -105.11416}
+  m_LocalPosition: {x: -12.67885, y: 0.10413, z: -81.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10079,7 +10079,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Cada personaje podr\xE1 interactuar con los objetos de sus colores.\n\nPulsa
-    TAB para cambiar de jugador"
+    WASD para moverte,\nESPACIO para saltar,\nTAB para cambiar de jugador"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12094,7 +12094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8395594767679730312, guid: 7e13b46adc22ea746b4c7fc4cfb387a6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -15074,7 +15074,7 @@ MonoBehaviour:
     - Position:
         x: -1.550209
         y: -0.000008024275
-        z: -135.10175
+        z: -80
       TangentIn:
         x: 0
         y: 0
@@ -15092,7 +15092,7 @@ MonoBehaviour:
     - Position:
         x: 20.722288
         y: -0.0000016093254
-        z: -134.57838
+        z: -80
       TangentIn:
         x: 0
         y: 0
@@ -16344,7 +16344,7 @@ Transform:
   m_GameObject: {fileID: 2060468733}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.045838103, y: 2.1399999, z: 0.43414015}
+  m_LocalPosition: {x: -0.048, y: 2.1399999, z: 0.696}
   m_LocalScale: {x: 0.050325666, y: 1, z: 0.14299169}
   m_ConstrainProportionsScale: 0
   m_Children: []
