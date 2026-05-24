@@ -22,6 +22,9 @@ public class DynamicMenuManager : MonoBehaviour
     public Button botonAccion;
     public TextMeshProUGUI textoBotonAccion;
 
+    [Tooltip("El botón para cerrar la aplicación")]
+    public Button botonSalir;
+
     public Slider sliderVolumen;
 
     [Header("Controles")]
@@ -89,6 +92,11 @@ public class DynamicMenuManager : MonoBehaviour
 
         botonContinuar.onClick.RemoveAllListeners();
         botonAccion.onClick.RemoveAllListeners();
+        botonSalir.onClick.RemoveAllListeners();
+
+        // Configurar el botón de salir para que funcione en cualquier menú visible
+        botonSalir.gameObject.SetActive(true);
+        botonSalir.onClick.AddListener(SalirDelJuego);
 
         switch (nuevoEstado)
         {
@@ -157,5 +165,14 @@ public class DynamicMenuManager : MonoBehaviour
         GameData.personaje1Activo = true;
 
         SceneManager.LoadScene(0); 
+    }
+
+    private void SalirDelJuego()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
 }
