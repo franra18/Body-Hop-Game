@@ -29,15 +29,15 @@ public class DynamicMenuManager : MonoBehaviour
 
     private MenuState estadoActual = MenuState.Oculto;
 
+    private static bool juegoIniciado = false;
+
     private void OnEnable() => pauseAction.Enable();
     private void OnDisable() => pauseAction.Disable();
 
     void Start()
     {
-        // 1. Cargar el volumen guardado (si no existe un guardado previo, por defecto será 1f)
         float volumenGuardado = PlayerPrefs.GetFloat("VolumenJuego", 1f);
 
-        // 2. Aplicar el volumen al juego y actualizar la posición de la barra
         AudioListener.volume = volumenGuardado;
         sliderVolumen.minValue = 0f;
         sliderVolumen.maxValue = 1f;
@@ -45,15 +45,20 @@ public class DynamicMenuManager : MonoBehaviour
 
         sliderVolumen.onValueChanged.AddListener(CambiarVolumen);
 
-        MostrarMenu(MenuState.Inicio);
+        if (!juegoIniciado)
+        {
+            juegoIniciado = true;
+            MostrarMenu(MenuState.Inicio);
+        }
+        else
+        {
+            ReanudarJuego();
+        }
     }
 
     public void CambiarVolumen(float valor)
     {
-        // 1. Cambiar el volumen maestro de todo el juego en tiempo real
         AudioListener.volume = valor;
-
-        // 2. Guardar el nuevo valor en la memoria para mantenerlo al cambiar de escena
         PlayerPrefs.SetFloat("VolumenJuego", valor);
         PlayerPrefs.Save();
     }
@@ -62,7 +67,6 @@ public class DynamicMenuManager : MonoBehaviour
     {
         if (pauseAction.WasPressedThisFrame())
         {
-            // Si el menú está oculto, pausamos. Si ya estamos en pausa, reanudamos.
             if (estadoActual == MenuState.Oculto)
             {
                 MostrarMenu(MenuState.Pausa);
@@ -79,12 +83,10 @@ public class DynamicMenuManager : MonoBehaviour
         estadoActual = nuevoEstado;
         panelFondo.SetActive(true);
 
-        // Pausar el tiempo del juego y mostrar el ratón
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        // Limpiar las acciones anteriores de los botones para que no se acumulen
         botonContinuar.onClick.RemoveAllListeners();
         botonAccion.onClick.RemoveAllListeners();
 
@@ -93,7 +95,7 @@ public class DynamicMenuManager : MonoBehaviour
             case MenuState.Inicio:
                 textoTitulo.text = "BODY HOP";
 
-                botonContinuar.gameObject.SetActive(false); // Ocultamos el botón continuar
+                botonContinuar.gameObject.SetActive(false); 
 
                 textoBotonAccion.text = "Comenzar partida";
                 botonAccion.onClick.AddListener(ReanudarJuego);
@@ -107,7 +109,7 @@ public class DynamicMenuManager : MonoBehaviour
                 botonContinuar.onClick.AddListener(ReanudarJuego);
 
                 textoBotonAccion.text = "Reiniciar partida";
-                botonAccion.onClick.AddListener(ReiniciarEscena);
+                botonAccion.onClick.AddListener(ReiniciarJuegoDesdeCero);
                 break;
 
             case MenuState.GameOver:
@@ -124,8 +126,8 @@ public class DynamicMenuManager : MonoBehaviour
 
                 botonContinuar.gameObject.SetActive(false);
 
-                textoBotonAccion.text = "Empezar partida nueva";
-                botonAccion.onClick.AddListener(ReiniciarEscena);
+                textoBotonAccion.text = "Empezar de nuevo";
+                botonAccion.onClick.AddListener(ReiniciarJuegoDesdeCero);
                 break;
         }
     }
@@ -135,7 +137,6 @@ public class DynamicMenuManager : MonoBehaviour
         estadoActual = MenuState.Oculto;
         panelFondo.SetActive(false);
 
-        // Restaurar el tiempo y ocultar el ratón
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -143,9 +144,18 @@ public class DynamicMenuManager : MonoBehaviour
 
     private void ReiniciarEscena()
     {
-        // Restaura el tiempo antes de recargar, si no, la nueva escena cargará pausada
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    private void ReiniciarJuegoDesdeCero()
+    {
+        Time.timeScale = 1f;
+        juegoIniciado = false; 
+        
+        GameData.tiempoGuardado = -1f;
+        GameData.personaje1Activo = true;
+
+        SceneManager.LoadScene(0); 
+    }
 }
