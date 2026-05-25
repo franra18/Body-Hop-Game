@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class WaterReset : MonoBehaviour
+public class SpawnReset : MonoBehaviour
 {
     public Transform respawnPoint;
     public CanvasGroup fadeGroup;
@@ -93,6 +93,6 @@ public class WaterReset : MonoBehaviour
             player.transform.rotation = respawnPoint.rotation;
         }
         
-        Debug.Log("Player reset to bridge entrance.");
+        Debug.Log("Player reset to spawn point.");
     }
 }
